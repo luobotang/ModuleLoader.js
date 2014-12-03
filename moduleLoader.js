@@ -18,6 +18,7 @@
 })(function (document) {
 
 	var baseUrl,
+		nocache = false,
 		paths = {},
 		hasOwn = Object.prototype.hasOwnProperty;
 
@@ -35,6 +36,9 @@
 			if (baseUrl.length > 0 && baseUrl.substr(-1) != '/') {
 				baseUrl += '/';
 			}
+		}
+		if (typeof options.nocache === 'boolean') {
+			nocache = options.nocache;
 		}
 		if (options.paths) {
 			for (var path in options.paths) {
@@ -61,16 +65,18 @@
 			}
 		}
 
+		var _ = nocache ? '?_=' + (+new Date()) : '';
+
 		for (var i = 0, module, ext, len = modules.length; i < len; i++) {
 			module = normalizePath(modules[i]);
 			if (module.slice(-4).toLowerCase() === '.css') {
-				loadCSS(module);
+				loadCSS(module + _);
 			} else {
 				if (module.slice(-3).toLowerCase() !== '.js') {
 					module += '.js';
 				}
 				num++;
-				loadJS(module, onLoad);
+				loadJS(module + _, onLoad);
 			}
 		}
 	}

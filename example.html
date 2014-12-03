@@ -5,16 +5,21 @@
 <title>ModuleLoader - 示例</title>
 </head>
 <body>
+
 <script src="moduleLoader.js"></script>
-<script>
+<script data-sc-url="http://test.com/sc/">
 ModuleLoader.config({
 	paths: {
 		jquery: '../jquery'
 	}
 });
+var s = document.getElementsByTagName('script'),
+	current = s[s.length - 1],
+	scUrl = current.getAttribute('data-sc-url');
+
 ModuleLoader.load(['jquery', 'style.css'], function () {
 	$(function () {
-		$('<p>Hello world!</p>').appendTo('body');
+		$('<div id="xsm-message-box">Hello world! ' + scUrl + '</div>').appendTo('body');
 	});
 });
 </script>
