@@ -1,0 +1,8 @@
+p {
+	color: red;
+	margin: 100px auto;
+	font: 50px/100px arial, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	width: 600px;
+}
